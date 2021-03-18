@@ -1,0 +1,172 @@
+[bar/mybar]
+width = 100%
+height = 30
+offset-x = 0%
+offset-y = 0%
+radius-top = 0
+radius-bottom = 0
+fixed-center = true
+top = true
+
+background = #44475A 
+foreground = #F8F8F2
+
+line-size = 2
+
+border-left-size = 0
+border-right-size = 0
+border-top-size = 0
+border-bottom-size = 2
+
+module-margin-left = 0
+module-margin-center = 2
+
+
+font-0 = Hack Nerd Font : size=10.5;2
+font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
+font-2 = siji:pixelsize=10;1
+
+modules-left = i3 xwindow
+modules-right = pulseaudio filesystem memory cpu xkeyboard date 
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:60:...%
+
+label-foreground = #F8F8F2 
+label-padding = 2
+
+[module/xkeyboard]
+type = internal/xkeyboard
+blacklist-0 = num lock
+
+blacklist-padding = 2
+
+format-prefix = "  KEYBOARD "
+
+label-layout = %layout%
+
+format-prefix-background = #6272A4
+format-prefix-padding = 2
+
+label-layout-background = #282A36
+label-layout-foreground = #F8F8F2
+label-layout-padding = 2
+
+[module/filesystem]
+type = internal/fs
+interval = 25
+mount-0 = /
+
+label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
+label-unmounted = %mountpoint% not mounted
+
+label-mounted-padding = 2
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+wrapping-scroll = false
+pin-workspaces = true
+
+; focused = Active workspace on focused monitor
+label-focused = %name%
+
+unfocused = Inactive workspace on any monitor
+label-unfocused = %name%
+
+visible = Active workspace on unfocused monitor
+label-visible = %index%
+label-visible-background = ${self.label-focused-background}
+label-visible-underline = ${self.label-focused-underline}
+
+; urgent = Workspace with urgency hint set
+label-urgent = %name%
+
+label-unfocused-background = #6272A4
+label-unfocused-foreground = #BFBFBF
+
+label-focused-background = #ff5555
+label-focused-foreground = #F8F8F2
+
+label-focused-padding = 2
+label-unfocused-padding = 2
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+format-prefix = "  CPU"
+
+label = %percentage:%%
+
+format-prefix-background = #282A36
+format-prefix-padding = 2
+
+label-background = #282A36
+label-padding = 2
+
+[module/memory]
+type = internal/memory
+interval = 2
+format-prefix = " RAM "
+
+label = %percentage_used%%
+
+format-prefix-background = #6272A4
+format-prefix-padding = 2
+
+label-background = #6272A4
+label-padding = 2
+
+[module/date]
+type = internal/date
+interval = 1.0
+format = <label>
+
+date = %d-%m-%Y%
+
+time = %H:%M:%S
+
+date-alt = %d-%m-%Y%
+time-alt =  %H:%M:%S
+
+label =   %date%    %time%
+
+label-background = #6272A4
+label-foreground = #F8F8F2
+label-padding = 2
+
+[module/pulseaudio]
+type = internal/pulseaudio
+
+format-volume = <label-volume> <bar-volume>
+label-volume =   %percentage%%
+
+label-muted =  muted
+
+bar-volume-width = 10
+bar-volume-foreground-0 = #00ff00
+bar-volume-gradient = true
+bar-volume-indicator = |
+bar-volume-indicator-font = 2
+bar-volume-fill = ─
+bar-volume-fill-font = 2
+bar-volume-empty = ─
+bar-volume-empty-font = 2
+bar-volume-empty-foreground = #FF5555
+
+[settings]
+screenchange-reload = true
+compositing-foreground = source
+compositing-border = over
+pseudo-transparency = true
+
+[global/wm]
+margin-top = 1
+margin-bottom = 1
+enable-ipc = true
+
