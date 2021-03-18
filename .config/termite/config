@@ -73,9 +73,9 @@ highlight = #2f2f2f
 ; color13 = #ec93d3
 ; color14 = #93e0e3
 ; color15 = #ffffff
-foreground      = #f8f8f2
+foreground      = #8be9fd
 foreground_bold = #f8f8f2
-cursor          = #f8f8f2
+cursor          = #bd93f9
 background      = rgba(40, 42, 54, .9)
 
 # black
