@@ -9,8 +9,8 @@ exec_always --no-startup-id picom &
 # #---Basic Definitions---# #
 smart_gaps on
 smart_borders on
-set $inner_gaps 4
-set $outer_gaps 4
+set $inner_gaps 0
+set $outer_gaps 0
 set $term --no-startup-id termite
 set $mod Mod4
 set $alt Mod1
@@ -40,11 +40,17 @@ bindsym $mod+q			            [con_id="__focused__" instance="^(?!dropdown_).*$"]
 # b
 bindsym $mod+b 			            exec --no-startup-id firefox 
 
+# n
+bindsym $mod+n 			            exec --no-startup-id nautilus 
+
 # r
 bindsym $mod+r 			            exec $term -e ranger
 
 # d
 bindsym $mod+d                  exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -b -i'
+
+# p
+bindsym $mod+p			            exec --no-startup-id pavucontrol
 
 # Fullscreen windows
 # g
@@ -70,12 +76,6 @@ bindsym $mod+Ctrl+k		          move workspace to output up
 bindsym $mod+l			            focus right
 bindsym $mod+Shift+l		        move right 30
 bindsym $mod+Ctrl+l		          move workspace to output right
-
-# n
-bindsym $mod+n			            exec --no-startup-id $term -e nvim ~/.config/nvim/init.vim
-
-# p
-bindsym $mod+p			            exec --no-startup-id pavucontrol
 
 # #---Workspace Bindings---# #
 bindsym $mod+Tab		      workspace next
