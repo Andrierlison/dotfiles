@@ -18,7 +18,6 @@ Plug 'preservim/nerdcommenter'
 Plug 'preservim/nerdtree'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'morhetz/gruvbox'
 Plug 'dracula/vim', { 'as': 'dracula' }
 
 call plug#end()
@@ -100,7 +99,7 @@ autocmd  FileType which_key set laststatus=0 noshowmode noruler
 
 "vim-airline/vim-airline
 set t_Co=256
-let g:airline_theme="gruvbox"
+let g:airline_theme="dracula"
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' ' 
