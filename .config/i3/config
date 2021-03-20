@@ -2,15 +2,13 @@
 
 # This config file will use environment variables such as $BROWSER and $TERMINAL.
 
+exec --no-startup-id "setxkbmap -model abnt2 -layout br -variant abnt2"
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id autotiling
-exec_always --no-startup-id /usr/bin/nitrogen --set-zoom-fill --random ~/wallpapers --save
+exec_always --no-startup-id /usr/bin/nitrogen --set-zoom-fill --random ~/Pictures/wallpapers --save
 exec_always --no-startup-id picom &
+
 # #---Basic Definitions---# #
-smart_gaps on
-smart_borders on
-set $inner_gaps 0
-set $outer_gaps 0
 set $term --no-startup-id termite
 set $mod Mod4
 set $alt Mod1
@@ -26,9 +24,6 @@ floating_modifier $mod
 
 # #---Gaps---# #
 for_window [class="^.*"] border pixel 6
-gaps inner $inner_gaps
-gaps outer $outer_gaps
-
 # #---Basic Bindings---# #
 bindsym $mod+Return 		         exec $term
 
@@ -52,11 +47,6 @@ bindsym $mod+d                  exec --no-startup-id i3-dmenu-desktop --dmenu='d
 # p
 bindsym $mod+p			            exec --no-startup-id pavucontrol
 
-# Fullscreen windows
-# g
-bindsym $mod+g		              gaps inner current set $inner_gaps; gaps outer current set $outer_gaps
-bindsym $mod+Shift+g		        gaps inner current set 0; gaps outer current set 0
-
 # h
 bindsym $mod+h			            focus left
 bindsym $mod+Shift+h		        move left 30
@@ -79,6 +69,7 @@ bindsym $mod+Ctrl+l		          move workspace to output right
 
 # #---Workspace Bindings---# #
 bindsym $mod+Tab		      workspace next
+bindsym $mod+Shift+Tab    workspace prev
 
 set $ws1 "1"
 set $ws2 "2"
@@ -144,6 +135,7 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% #decrease sound volume
 bindsym XF86AudioMute        exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle # mute sound
 
+# theme
 # class                 border  bground text    indicator child_border
 client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4   #6272A4
 client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
@@ -152,6 +144,3 @@ client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
 client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
 
 client.background       #F8F8F2
-
-exec --no-startup-id "setxkbmap -layout br,us -model pc105 -option grp:alt_caps_toggle"
-
