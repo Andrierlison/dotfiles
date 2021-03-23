@@ -9,7 +9,7 @@ fixed-center = true
 top = true
 
 background = #44475A 
-foreground = #F8F8F2
+foreground = #f1f1f1
 
 line-size = 1
 
@@ -19,7 +19,7 @@ border-top-size = 0
 border-bottom-size = 0
 
 module-margin-left = 0
-module-margin-center = 2
+module-margin-center = 0
 
 
 font-0 = Hack Nerd Font : size=10.5;2
@@ -89,10 +89,7 @@ label-visible-underline = ${self.label-focused-underline}
 label-urgent = %name%
 
 label-unfocused-background = #6272A4
-label-unfocused-foreground = #BFBFBF
-
 label-focused-background = #ff5555
-label-focused-foreground = #F8F8F2
 
 label-focused-padding = 2
 label-unfocused-padding = 2
@@ -180,7 +177,7 @@ compositing-border = over
 pseudo-transparency = true
 
 [global/wm]
-margin-top = 1
-margin-bottom = 1
+margin-top = 0
+margin-bottom = 0
 enable-ipc = true
 
