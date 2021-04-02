@@ -6,7 +6,6 @@ exec --no-startup-id "setxkbmap -model abnt2 -layout br -variant abnt2"
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id autotiling
 exec_always --no-startup-id /usr/bin/nitrogen --set-zoom-fill --random ~/Pictures/wallpapers --save
-exec_always --no-startup-id picom &
 
 # #---Basic Definitions---# #
 set $term --no-startup-id termite
@@ -18,34 +17,54 @@ set $lock i3lock
 set $suspend sudo systemctl suspend
 set $hibernate sudo -A systemctl hibernate
 
+set $android-studio /home/andrierlison/android-studio/bin/studio.sh
+
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
+for_window [class="^.*"] border pixel 2
+hide_edge_borders both
 
-# #---Gaps---# #
-for_window [class="^.*"] border pixel 6
 # #---Basic Bindings---# #
 bindsym $mod+Return 		         exec $term
 
 bindsym $mod+Escape	             exec --no-startup-id dm-tool switch-to-greeter
 
-# #---Letter Key Bindings---# #
-bindsym $mod+q			            [con_id="__focused__" instance="^(?!dropdown_).*$"] kill
+# a === android studio
+bindsym $mod+a                  exec --no-startup-id $android-studio
 
 # b
-bindsym $mod+b 			            exec --no-startup-id firefox 
+bindsym $mod+b 			            exec --no-startup-id blender
 
-# n
-bindsym $mod+n 			            exec --no-startup-id nautilus 
+# c === print Screen 
+bindsym $mod+c                   exec $term -e scrot
+
+# d === dmenu
+bindsym $mod+d                  exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -b -i'
+
+# f
+bindsym $mod+f 			            exec --no-startup-id firefox 
+
+# g === games
+bindsym $mod+g 			            exec --no-startup-id steam 
+
+# p
+bindsym $mod+p			            exec --no-startup-id pavucontrol
+
+# q === kill window
+bindsym $mod+q			            [con_id="__focused__" instance="^(?!dropdown_).*$"] kill
 
 # r
 bindsym $mod+r 			            exec $term -e ranger
 
-# d
-bindsym $mod+d                  exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -b -i'
+# s === control androi device
+bindsym $mod+s			            exec $term -e scrcpy
 
-# p
-bindsym $mod+p			            exec --no-startup-id pavucontrol
+# t === system monitor
+bindsym $mod+t 			            exec $term -e bpytop
+
+
+### Move and focus windows
 
 # h
 bindsym $mod+h			            focus left
@@ -135,7 +154,7 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% #decrease sound volume
 bindsym XF86AudioMute        exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle # mute sound
 
-# theme
+# theme dracuala
 # class                 border  bground text    indicator child_border
 client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4   #6272A4
 client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
