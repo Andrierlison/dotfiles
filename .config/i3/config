@@ -18,6 +18,7 @@ set $suspend sudo systemctl suspend
 set $hibernate sudo -A systemctl hibernate
 
 set $android-studio /home/andrierlison/android-studio/bin/studio.sh
+set $blender /home/andrierlison/blender-2.92.0-linux64/blender
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -34,7 +35,7 @@ bindsym $mod+Escape	             exec --no-startup-id dm-tool switch-to-greeter
 bindsym $mod+a                  exec --no-startup-id $android-studio
 
 # b
-bindsym $mod+b 			            exec --no-startup-id blender
+bindsym $mod+b 			            exec --no-startup-id $blender
 
 # c === print Screen 
 bindsym $mod+c                   exec $term -e scrot
