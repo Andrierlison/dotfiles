@@ -19,6 +19,9 @@ Plug 'preservim/nerdtree'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'thosakwe/vim-flutter'
+Plug 'natebosch/vim-lsc'
+Plug 'natebosch/vim-lsc-dart'
 
 call plug#end()
 
@@ -61,7 +64,7 @@ nmap <leader>a <esc> gg v G $
 
 "Navigate buffer
 noremap <F5> <ESC>:bprevious<CR>
-noremap <F6> <ESC>:bNext<CR>
+noremap <F6> <ESC>:bnext<CR>
 
 "Close buffer
 nmap <leader>q <ESC>:bd<CR>
@@ -135,6 +138,7 @@ let g:coc_global_extensions = [
       \  'coc-css',
       \  'coc-json', 
       \  'coc-tsserver', 
+      \  'coc-flutter',
       \  'coc-styled-components',
       \  'coc-highlight',
       \  'coc-pairs',
@@ -147,6 +151,7 @@ let g:coc_user_config = {
       \  "eslint.executeAutoFix": "true",
       \  'coc.preferences.formatOnSaveFiletypes': [
       \     'html',
+      \     'dart',
       \     'css', 
       \     'scss',
       \     'json',
