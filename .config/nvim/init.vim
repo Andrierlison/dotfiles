@@ -1,27 +1,20 @@
+"sheerun/vim-polyglot
+let g:polyglot_disabled = ['markdown']
+let g:polyglot_disabled = ['markdown.plugin']
+
 call plug#begin('~/.vim/plugged')
 
 Plug 'liuchengxu/vim-which-key'
-Plug 'mhinz/vim-signify'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'mbbill/undotree'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'voldikss/fzf-floaterm'
-Plug 'voldikss/vim-floaterm'
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
-Plug 'simeji/winresizer'
 Plug 'Yggdroot/indentLine'
 Plug 'ryanoasis/vim-devicons'
 Plug 'sheerun/vim-polyglot'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-airline/vim-airline'
 Plug 'preservim/nerdcommenter'
-Plug 'preservim/nerdtree'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'thosakwe/vim-flutter'
-Plug 'natebosch/vim-lsc'
-Plug 'natebosch/vim-lsc-dart'
 
 call plug#end()
 
@@ -40,7 +33,6 @@ set title
 set noshowmode
 set termguicolors
 set winwidth=79
-set mouse=a
 set updatetime=50 
 set number 
 set encoding=UTF-8
@@ -49,18 +41,15 @@ set nobackup
 set nowritebackup
 set scrolloff=10
 
-abbr imr import React from 'react';
-abbr ims import styled from 'styled-components';
-abbr edf export default function
-abbr ec export const
-
 "Keys Maps
+
+map <up> <nop>
+map <down> <nop>
+map <left> <nop>
+map <right> <nop>
 
 nnoremap <SPACE> <Nop>
 let mapleader=" "
-
-"select all
-nmap <leader>a <esc> gg v G $
 
 "Navigate buffer
 noremap <F5> <ESC>:bprevious<CR>
@@ -99,32 +88,18 @@ autocmd! FileType which_key
 autocmd  FileType which_key set laststatus=0 noshowmode noruler
       \| autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler
 
-
 "vim-airline/vim-airline
 set t_Co=256
 let g:airline_theme="dracula"
 let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep = ' ' 
-let g:airline#extensions#tabline#left_alt_sep = '>'
-let g:airline#extensions#tabline#formatter = 'jsformatter'
+let g:airline#extensions#coc#enabled = 1
+let g:airline#extensions#hunks#coc_git = 1
 
 " preservim/nerdcommenter
-map <leader>c <Plug>NERDCommenterInvert
+map cc <Plug>NERDCommenterInvert
 
-"voldikss/vim-floaterm 
-nnoremap <leader>r <ESC>:FloatermNew ranger<CR>
-
-command! Ranger FloatermNew ranger
-command! FZF FloatermNew fzf
-
-let g:floaterm_keymap_new    = '<leader>n'
-let g:floaterm_keymap_prev   = '>'
-let g:floaterm_keymap_next   = '<'
-let g:floaterm_keymap_toggle = '<leader>t'
-
-" voldikss/fzf-floaterm
-noremap <leader>f <ESC>:FZF<CR>
+" mbbill/undotree
+nmap <F7> <ESC>:UndotreeToggle<CR>
 
 "neoclide/coc.nvim
 nmap <silent> gd <Plug>(coc-definition)
@@ -136,6 +111,11 @@ nmap <silent> gr <Plug>(coc-references)
 let g:coc_global_extensions = [
       \  'coc-html',
       \  'coc-css',
+      \  'coc-snippets',
+      \  'coc-git',
+      \  'coc-svg',
+      \  'coc-explorer',
+      \  'coc-flutter',
       \  'coc-json', 
       \  'coc-tsserver', 
       \  'coc-flutter',
@@ -147,20 +127,16 @@ let g:coc_global_extensions = [
       \  'coc-emmet',
       \   ]
 
-let g:coc_user_config = {
-      \  "eslint.executeAutoFix": "true",
-      \  'coc.preferences.formatOnSaveFiletypes': [
-      \     'html',
-      \     'dart',
-      \     'css', 
-      \     'scss',
-      \     'json',
-      \     'javascript', 
-      \     'typescript', 
-      \     'javascriptreact', 
-      \     'typescriptreact',
-      \     ],
-      \}
+"Toggle explorer
+nnoremap <space>b :CocCommand explorer<CR>
+
+"Use <C-l> for trigger snippet expand.
+imap <C-l> <Plug>(coc-snippets-expand)
+
+"Use <Tab> and <S-Tab> to navigate the completion list:
+
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 "Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
@@ -189,32 +165,4 @@ function! s:show_documentation()
     execute '!' . &keywordprg . " " . expand('<cword>')
   endif
 endfunction
-
-"preservim/nerdtree
-nmap <leader>b :NERDTreeToggle<CR>
-
-let NERDTreeMouseMode=2
-let NERDTreeShowHidden=1
-let g:NERDTreeGitStatusUseNerdFonts = 1
-let g:NERDSpaceDelims = 1
-let g:NERDDefaultAlign = 'left'
-
-"Start NERDTree and put the cursor back in the other window.
-autocmd VimEnter * NERDTree | wincmd p
-
-"tiagofumo/vim-nerdtree-syntax-highlight
-let g:WebDevIconsDisableDefaultFolderSymbolColorFromNERDTreeDir = 1
-let g:WebDevIconsDisableDefaultFileSymbolColorFromNERDTreeFile = 1
-let g:NERDTreeFileExtensionHighlightFullName = 1
-let g:NERDTreeExactMatchHighlightFullName = 1
-let g:NERDTreePatternMatchHighlightFullName = 1
-let g:NERDTreeHighlightFolders = 1 
-let g:NERDTreeHighlightFoldersFullName = 1 
-
-" mbbill/undotree
-nmap <F7> <ESC>:UndotreeToggle<CR>
-
-" sheerun/vim-polyglot
-let g:polyglot_disabled = ['markdown']
-let g:polyglot_disabled = ['markdown.plugin']
 
