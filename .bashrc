@@ -19,5 +19,4 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 export PATH="$PATH:`pwd`/flutter/bin"
 
 # Commands executed when open terminal
-pwd
 ls -a
