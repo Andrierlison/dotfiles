@@ -7,7 +7,7 @@ exec_always --no-startup-id autotiling
 exec_always --no-startup-id /usr/bin/nitrogen --set-zoom-fill --random ~/Pictures/wallpapers --save
 
 # #---Basic Definitions---# #
-set $term --no-startup-id termite
+set $term --no-startup-id alacritty
 set $mod Mod4
 set $alt Mod1
 set $shutdown sudo -A shutdown -h now
