@@ -1,10 +1,8 @@
 # vim: filetype=i3config
 
-# This config file will use environment variables such as $BROWSER and $TERMINAL.
-
 exec --no-startup-id "setxkbmap -model abnt2 -layout br -variant abnt2"
+
 exec_always --no-startup-id autotiling
-exec_always --no-startup-id /usr/bin/nitrogen --set-zoom-fill --random ~/Pictures/wallpapers --save
 
 # #---Basic Definitions---# #
 set $term --no-startup-id alacritty
@@ -32,27 +30,15 @@ bindsym $mod+Escape	             exec --no-startup-id dm-tool switch-to-greeter
 # a === android studio
 bindsym $mod+a                  exec --no-startup-id $android-studio
 
-# b
-bindsym $mod+b 			            exec --no-startup-id blender
-
-# c === print Screen 
-bindsym $mod+c                   exec $term -e scrot
-
 # d === dmenu
 bindsym $mod+d                  exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -b -i'
 
 # f
 bindsym $mod+f 			            exec --no-startup-id firefox 
 
-# g === games
-bindsym $mod+g 			            exec --no-startup-id steam 
-
-# m === music's
-bindsym $mod+m                  exec $term -e cmus
-
 # Polybar Toggle
 bindsym $mod+u                   exec --no-startup-id polybar mybar &
-bindsym $mod+i                   exec --no-startup-id killall -q polybar
+bindsym $mod+i                   exec --no-startup-id killall -q polybar 
 
 # p
 bindsym $mod+p			            exec --no-startup-id pavucontrol
@@ -68,9 +54,6 @@ bindsym $mod+s			            exec $term -e scrcpy
 
 # t === system monitor
 bindsym $mod+t 			            exec $term -e bpytop
-
-# Syncthing
-bindsym $mod+v 			            exec $term -e syncthing
 
 ### Move and focus windows
 
@@ -162,12 +145,22 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% #decrease sound volume
 bindsym XF86AudioMute        exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle # mute sound
 
-# theme dracuala
-# class                 border  bground text    indicator child_border
-client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4   #6272A4
-client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
-client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
-client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
-client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
+# set primary gruvbox colorscheme colors
+set $bg #282828
+set $red #cc241d
+set $green #98971a
+set $yellow #d79921
+set $blue #458588
+set $purple #b16286
+set $aqua #689d68
+set $gray #a89984
+set $darkgray #1d2021
+
+# green gruvbox
+# class                 border|backgr|text|indicator|child_border
+#client.focused          $green $green $darkgray $purple $darkgray
+#client.focused_inactive $darkgray $darkgray $yellow $purple $darkgray
+#client.unfocused        $darkgray $darkgray $yellow $purple $darkgray
+#client.urgent           $red $red $white $red $red
 
 client.background       #F8F8F2
