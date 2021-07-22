@@ -1,11 +1,7 @@
-"sheerun/vim-polyglot
-let g:polyglot_disabled = ['markdown', 'markdown.plugin', 'autoindent']
-
 call plug#begin('~/.vim/plugged')
 
 Plug 'gruvbox-community/gruvbox'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'sheerun/vim-polyglot'
 
 call plug#end()
 
@@ -13,45 +9,30 @@ colorscheme gruvbox
 filetype plugin on
 syntax enable
 
-set signcolumn=number
-set number
+if exists('+termguicolors')
+  let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
+
+set autoindent autoread
+set background=dark t_Co=256
 set encoding=UTF-8 
-set updatetime=50
-set scrolloff=10
-set background=dark
-set path+=**
+set hlsearch incsearch
+set noswapfile nobackup nowritebackup nocompatible
+set number relativenumber signcolumn=number
+set shiftwidth=2 tabstop=2 softtabstop=2 expandtab 
+set smartcase smartindent smarttab
+set title showcmd confirm
+set updatetime=10 scrolloff=10 ttimeoutlen=10
+set wildmenu path+=** 
 set wildignore+=**/node_modules/**
+set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
 set winwidth=80
-set hlsearch
-set incsearch
-set cursorline
-set expandtab
-set smartcase
-set smartindent
-set confirm
-set title
-set hidden
-set wildmenu
-set nocompatible
-set noswapfile
-set nobackup
-set nowritebackup
-set t_Co=256
-set shortmess-=S
-set cmdheight=2
 
 "Status-line
 set laststatus=2
-set statusline=
-set statusline+=%#IncSearch#
-set statusline+=\ %y
-set statusline+=\ %r
-set statusline+=%#CursorLineNr#
-set statusline+=\ %t
-set statusline+=%= "Right side settings
-set statusline+=%#Search#
-set statusline+=\ Line\ %l/%L
-set statusline+=\ [Column\ %c]
+set statusline+=%#ErrorMsg#\%{StatusDiagnostic()}\%#Statusline#\ %t\  
 
 "Help files always open in a vertical split on the right
 augroup helpfiles
@@ -112,6 +93,7 @@ let g:netrw_liststyle=3
 let g:netrw_preview=1
 let g:netrw_winsize=16
 
+"ToggleNetrw
 let g:NetrwIsOpen=0
 
 function! ToggleNetrw()
@@ -130,13 +112,7 @@ function! ToggleNetrw()
   endif
 endfunction
 
-augroup AutoDeleteNetrwHiddenBuffers
-  au!
-  au FileType netrw setlocal bufhidden=wipe
-augroup end
-
-"ToggleNetrw
-nmap <SPACE>b <ESC>:call ToggleNetrw()<CR>
+noremap <silent> <SPACE>b :call ToggleNetrw()<CR>
 
 "Plugins configs
 
@@ -192,34 +168,27 @@ endfunction
 "Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
-let g:coc_user_config = {
-      \"coc.preferences.formatOnSaveFiletypes": [
-        \"dart",
-        \"python",
-        \"css",
-        \"scss",
-        \"json",
-        \"html",
-        \"yaml",
-        \"javascript",
-        \"typescript",
-        \"javascriptreact",
-        \"typescriptreact"
-        \],
-        \"coc.global.extensions": [
-          \"coc-css",
-          \"coc-emmet",
-          \"coc-flutter",
-          \"coc-highlight",
-          \"coc-html",
-          \"coc-json",
-          \"coc-prettier",
-          \"coc-pyright",
-          \"coc-snippets",
-          \"coc-svg",
-          \"coc-tsserver",
-          \"coc-yaml"
-          \],
-          \"flutter.lsp.initialization.closingLabels": "true",
-          \"python.linting.pylintEnabled": "true",
-          \}
+let g:coc_global_extensions = [
+      \"coc-css",
+      \"coc-flutter",
+      \"coc-highlight",
+      \"coc-html",
+      \"coc-json",
+      \"coc-prettier",
+      \"coc-snippets",
+      \"coc-tsserver",
+      \]
+
+function! StatusDiagnostic() abort
+  let info = get(b:, 'coc_diagnostic_info', {})
+  if empty(info) | return '' | endif
+  let msgs = []
+  if get(info, 'error', 0)
+    call add(msgs, ' Error: ' . info['error'])
+  endif
+  if get(info, 'warning', 0)
+    call add(msgs, ' Warning: ' . info['warning'])
+  endif
+  return join(msgs, ' ')
+endfunction
+
