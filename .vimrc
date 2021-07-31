@@ -1,8 +1,6 @@
 call plug#begin('~/.vim/plugged')
-
 Plug 'gruvbox-community/gruvbox'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
 call plug#end()
 
 colorscheme gruvbox
@@ -15,6 +13,7 @@ if exists('+termguicolors')
   set termguicolors
 endif
 
+set hidden
 set autoindent autoread
 set background=dark t_Co=256
 set encoding=UTF-8 
@@ -56,15 +55,6 @@ for key in ['<Up>', '<Down>', '<Left>', '<Right>']
   exec 'inoremap' key '<Nop>'
   exec 'vnoremap' key '<Nop>'
 endfor
-
-"Move between windowns with leader key 
-noremap <silent> <leader>l <C-w>l 
-noremap <silent> <leader>k <C-w>k 
-noremap <silent> <leader>j <C-w>j 
-noremap <silent> <leader>h <C-w>h 
-
-"Close buffer 
-noremap <leader>q <ESC>:bd<CR>
 
 "Open find command
 noremap <leader>f <ESC>:find 
@@ -174,6 +164,7 @@ let g:coc_global_extensions = [
       \"coc-highlight",
       \"coc-html",
       \"coc-json",
+      \"coc-phpls",
       \"coc-prettier",
       \"coc-snippets",
       \"coc-tsserver",
