@@ -138,3 +138,8 @@ colors: *gruvbox_material_medium_dark
 font:
   normal:
     family: "Hack Nerd Font"
+window:
+  padding:
+    x: 10
+    y: 10
+
