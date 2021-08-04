@@ -4,27 +4,32 @@ general {
     interval = 1
 }
 
+order += "tztime local"
 order += "volume master"
 order += "memory"
-order += "tztime local"
 
 tztime local {
-  format = "%H:%M:%S"
-    separator = true
-    separator_block_width = 20
+    align = "right"
+    min_width = 500
+    separator = false
+  format = "%H:%M:%S / %d-%m-%Y"
 }
 
 volume master {
-  format = "♪: %volume"
-    format_muted = "♪: muted (%volume)"
+    align = "center"
     device = "default"
+    format_muted = "♪: muted (%volume)"
+    min_width = 200
     mixer = "Master"
     mixer_idx = 0
+    separator = false
+  format = "♪: %volume"
 }
 
 memory {
-  format = "Used: %used Free: %free"
-    threshold_degraded = 40%
+    separator = false
     threshold_critical = 20%
+    threshold_degraded = 40%
+  format = "Free: %free Available: %available ( Used: %used / %total )"
 }
 
