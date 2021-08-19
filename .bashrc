@@ -18,7 +18,11 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 export PATH="$PATH:`pwd`/flutter/bin"
 
+export PATH="$PATH:$HOME/go/bin"
+
 export EDITOR=vim
+
+set -o vi
 
 # Commands executed when open terminal
 ls -a
