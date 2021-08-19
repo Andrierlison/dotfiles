@@ -29,23 +29,19 @@ bindsym $mod+n bar mode toggle
 
 # h
 bindsym $mod+h focus left
-bindsym $mod+Shift+h move left 30
-bindsym $mod+Ctrl+h move workspace to output left
+bindsym $mod+Shift+h move left
 
 # j
 bindsym $mod+j focus down
-bindsym $mod+Shift+j move down 30
-bindsym $mod+Ctrl+j move workspace to output down
+bindsym $mod+Shift+j move down
 
 # k
 bindsym $mod+k focus up
-bindsym $mod+Shift+k move up 30
-bindsym $mod+Ctrl+k move workspace to output up
+bindsym $mod+Shift+k move up 
 
 # l
 bindsym $mod+l focus right
-bindsym $mod+Shift+l move right 30
-bindsym $mod+Ctrl+l move workspace to output right
+bindsym $mod+Shift+l move right
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -62,15 +58,12 @@ bindsym $mod+d exec --no-startup-id rofi -show
 # enter fullscreen mode for the focused container
 bindsym $mod+F11 fullscreen toggle
 
-# change container layout (stacked, tabbed, toggle split)
+# change container layout (tabbed, toggle split)
 bindsym $mod+Shift+t layout tabbed
 bindsym $mod+Shift+s layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+space floating toggle
-
-# a === android studio
-bindsym $mod+a exec --no-startup-id $android-studio
 
 # f
 bindsym $mod+f exec --no-startup-id firefox 
@@ -79,13 +72,13 @@ bindsym $mod+f exec --no-startup-id firefox
 bindsym $mod+p exec --no-startup-id pavucontrol
 
 # r
-bindsym $mod+r exec $term -e ranger
+bindsym $mod+r exec --no-startup-id ranger
 
 # s === control android device
-bindsym $mod+s exec $term -e scrcpy
+bindsym $mod+s exec --no-startup-id scrcpy
 
 # t === system monitor
-bindsym $mod+t exec $term -e bpytop
+bindsym $mod+t exec $term -e htop
 
 set $ws1 "1"
 set $ws2 "2"
@@ -148,7 +141,7 @@ client.urgent $red $red $white $red $red
 client.background #F8F8F2
 
 bar {
-  position top
+  position bottom
     status_command i3status
     workspace_buttons yes
     colors {
