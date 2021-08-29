@@ -22,6 +22,10 @@ export PATH="$PATH:$HOME/go/bin"
 
 export EDITOR=vim
 
+export QT_QPA_PLATFORMTHEME="qt5ct"  
+
+alias vimconf='vim -O ~/.vimrc ~/.vim/coc-settings.json'
+
 set -o vi
 
 # Commands executed when open terminal
