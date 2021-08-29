@@ -1,7 +1,7 @@
 set $mod Mod4
 set $term --no-startup-id alacritty
 
-font pango:Harck Nerd Font 14
+font pango:Hack Nerd Font Mono 14
 
 ## Borders
 for_window [class="^.*"] border pixel 4
@@ -47,7 +47,7 @@ bindsym $mod+Shift+l move right
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec $term
+bindsym $mod+Return exec $term -e tmux
 
 # kill focused window
 bindsym $mod+q kill
