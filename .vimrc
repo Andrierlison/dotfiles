@@ -1,8 +1,12 @@
 call plug#begin('~/.vim/plugged')
 Plug 'gruvbox-community/gruvbox'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'sheerun/vim-polyglot'
 call plug#end()
 
+let loaded_netrwPlugin = 1
+
+set lazyredraw
 set hidden
 set autoindent autoread
 set background=dark t_Co=256
@@ -62,46 +66,20 @@ endfor
 noremap <leader>f <ESC>:find 
 noremap <leader>r <ESC>:vertical terminal ranger<CR>
 noremap <leader>t <ESC>:vertical terminal 
-"
+
+noremap <leader>q <ESC>:bd<CR> 
+noremap <leader>w <ESC>:w<CR> 
+
+noremap <leader>h <ESC><c-w>h 
+noremap <leader>j <ESC><c-w>j 
+noremap <leader>k <ESC><c-w>k 
+noremap <leader>l <ESC><c-w>l 
+
 "Move the lines up and down
 xnoremap K :move '<-2<CR>gv-gv
 xnoremap J :move '>+1<CR>gv-gv
 
-"Place date like Ter 26/Out/2004 hs 10:53
-iab ,d <C-R>=strftime("%a %d/%b/%Y hs %H:%M")<CR>
-
-"Netrw
-let g:netrw_altv=1
-let g:netrw_banner=0
-let g:netrw_browse_split=3
-let g:netrw_liststyle=3
-let g:netrw_preview=1
-let g:netrw_winsize=16
-
-"ToggleNetrw
-let g:NetrwIsOpen=0
-
-function! ToggleNetrw()
-  if g:NetrwIsOpen
-    let i = bufnr("$")
-    while (i >= 1)
-      if (getbufvar(i, "&filetype") == "netrw")
-        silent exe "bwipeout " . i 
-      endif
-      let i-=1
-    endwhile
-    let g:NetrwIsOpen=0
-  else
-    let g:NetrwIsOpen=1
-    silent Lexplore
-  endif
-endfunction
-
-noremap <silent> <SPACE>b :call ToggleNetrw()<CR>
-
 "neoclide/coc.nvim
-imap <C-l> <Plug>(coc-snippets-expand)
-inoremap <silent><expr> <c-space> coc#refresh()
 nmap <C-g> <esc>:CocCommand git.chunkInfo<CR>
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gi <Plug>(coc-implementation)
@@ -109,12 +87,20 @@ nmap <silent> gr <Plug>(coc-references)
 nmap <silent> gt <Plug>(coc-type-definition)
 nmap [g <Plug>(coc-git-prevchunk)
 nmap ]g <Plug>(coc-git-nextchunk)
+nnoremap <silent> <SPACE>b :CocCommand explorer<CR>
 nnoremap <silent> <leader>y  :<C-u>CocList -A --normal yank<cr>
 nnoremap <silent><nowait> <leader>c  :<C-u>CocList commands<cr>
 nnoremap <silent><nowait> <leader>d  :<C-u>CocList diagnostics<cr>
 nnoremap <silent><nowait> <leader>e  :<C-u>CocList extensions<cr>
 nnoremap <silent><nowait> <leader>o  :<C-u>CocList outline<cr>
 nnoremap <silent><nowait> <leader>s  :<C-u>CocList -I symbols<cr>
+
+"Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-leader> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
 
 "Use tab for trigger completion with characters ahead and navigate.
 inoremap <silent><expr> <TAB>
@@ -148,10 +134,16 @@ endfunction
 "Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
+"For scss files, you may need use
+autocmd FileType scss setl iskeyword+=@-@
+
 let g:coc_global_extensions = [
       \"coc-css",
+      \"coc-emmet",
+      \"coc-explorer",
       \"coc-flutter",
       \"coc-git",
+      \"coc-go",
       \"coc-highlight",
       \"coc-html",
       \"coc-json",
@@ -160,6 +152,7 @@ let g:coc_global_extensions = [
       \"coc-prettier",
       \"coc-pyright",
       \"coc-snippets",
+      \"coc-sql",
       \"coc-tsserver",
       \"coc-vimlsp",
       \"coc-yank",
