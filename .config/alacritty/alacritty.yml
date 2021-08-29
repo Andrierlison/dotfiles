@@ -137,7 +137,7 @@ schemes:
 colors: *gruvbox_material_medium_dark
 font:
   normal:
-    family: "Hack Nerd Font"
+    family: "Hack Nerd Font Mono"
 window:
   padding:
     x: 10
