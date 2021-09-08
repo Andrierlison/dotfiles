@@ -18,8 +18,6 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 export PATH="$PATH:`pwd`/flutter/bin"
 
-export PATH="$PATH:$HOME/go/bin"
-
 export EDITOR=vim
 
 export QT_QPA_PLATFORMTHEME="qt5ct"  
@@ -27,6 +25,3 @@ export QT_QPA_PLATFORMTHEME="qt5ct"
 alias vimconf='vim -O ~/.vimrc ~/.vim/coc-settings.json'
 
 set -o vi
-
-# Commands executed when open terminal
-ls -a
