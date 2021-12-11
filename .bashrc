@@ -16,6 +16,8 @@ export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 
+export PATH=$PATH:~/android-studio/bin
+
 export PATH="$PATH:`pwd`/flutter/bin"
 
 export EDITOR=vim
@@ -24,4 +26,8 @@ export QT_QPA_PLATFORMTHEME="qt5ct"
 
 alias vimconf='vim -O ~/.vimrc ~/.vim/coc-settings.json'
 
+export HISTCONTROL=ignoreboth:erasedups
+
 set -o vi
+
+date
