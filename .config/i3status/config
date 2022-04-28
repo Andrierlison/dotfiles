@@ -1,35 +1,48 @@
 general {
   output_format = "i3bar"
-    colors = true
-    interval = 1
+  colors = true
+  separator = false
+  interval = 1
+  color_good = "#50FA7B"
+  color_degraded = "#F1FA8C"
+  color_bad = "#FF5555"
 }
 
 order += "tztime local"
 order += "volume master"
+order += "cpu_usage"
 order += "memory"
+order += "disk /"
+order += "wireless wlp4s0"
+
+cpu_usage {
+  format = "[ CPU: %usage ]"
+}
+
+wireless wlp4s0 {
+  format_up = "[ %quality %essid %ip ]"
+  format_down = "[ Connection: down ]"
+}
+
+disk "/" {
+  format = "[ DISK: %used / %total ]"
+}
 
 tztime local {
-    align = "right"
-    min_width = 500
-    separator = false
-  format = "%H:%M:%S / %d-%m-%Y"
+  format = "[ %H:%M:%S  %d/%m/%Y ]"
 }
 
 volume master {
-    align = "center"
-    device = "default"
-    format_muted = "♪: muted (%volume)"
-    min_width = 200
-    mixer = "Master"
-    mixer_idx = 0
-    separator = false
-  format = "♪: %volume"
+  device = "default"
+  format_muted = "VOLUME MUTED (%volume)"
+  mixer = "Master"
+  mixer_idx = 0
+  format = "[ VOLUME: %volume ]"
 }
 
 memory {
-    separator = false
-    threshold_critical = 20%
-    threshold_degraded = 40%
-  format = "Free: %free Available: %available ( Used: %used / %total )"
+  threshold_critical = 20%
+  threshold_degraded = 40%
+  format = "[ RAM %used / %total ]"
 }
 
