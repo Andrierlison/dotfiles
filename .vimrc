@@ -1,96 +1,118 @@
+"Disable netrw plugin
+let loaded_netrwPlugin = 1
+
 call plug#begin('~/.vim/plugged')
-Plug 'gruvbox-community/gruvbox'
+Plug 'dracula/vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
-set hidden
-set autoindent autoread
-set background=dark t_Co=256
+set autoindent 
+set autoread
+set background=dark 
+set cmdheight=2
+set confirm
+set cursorline
 set encoding=UTF-8 
-set hlsearch incsearch
-set noswapfile nobackup nowritebackup nocompatible
-set number relativenumber signcolumn=number
-set shiftwidth=2 tabstop=2 softtabstop=2 expandtab 
-set smartcase smartindent smarttab
-set title showcmd confirm
-set updatetime=10 scrolloff=10 ttimeoutlen=10
-set wildmenu path+=** 
-set wildignore+=**/node_modules/**
-set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
+set expandtab 
+set hidden
+set hlsearch 
+set incsearch
+set mouse=a
+set nobackup 
+set nocompatible
+set noswapfile 
+set nowrap
+set nowritebackup 
+set number 
+set path+=** 
+set relativenumber
+set scrolloff=10 
+set shiftwidth=2 
+set shortmess+=c
+set showcmd 
+set showmatch
+set signcolumn=number
+set smartcase 
+set smartindent 
+set smarttab
+set softtabstop=2 
+set t_Co=256
+set tabstop=2 
+set termguicolors
+set title 
+set ttimeoutlen=10
+set updatetime=10 
+set wildignore+=*.docx,*.jpeg,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
+set wildignore+=*/node_modules/*
+set wildmenu 
 set winwidth=80
 
 "Status-line
-set laststatus=2
-set statusline+=%#GitSignsAdd#
+set laststatus=1
+set statusline=
+set statusline+=%#Function#
 set statusline+=\ %t
-set statusline+=%#GitSignsChange#
+set statusline+=%#Conceal#
 set statusline+=\ %{get(g:,'coc_git_status','')}
 set statusline+=\ %{get(b:,'coc_git_status','')}
 set statusline+=\ %{get(b:,'coc_git_blame','')}
-set statusline+=%#GitSignsDelete#
+set statusline+=%#Error#
 set statusline+=\ %{StatusDiagnostic()}
 
-colorscheme gruvbox
+colorscheme dracula
 filetype plugin on
-syntax enable
+syntax on 
+syntax enable 
 
-abbr pipe \|
+"Open helpfiles in vertical split
+augroup helpfiles
+  au!
+  au BufRead,BufEnter */doc/* wincmd L
+augroup END
 
+"Set cursor to pipe
+let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
+let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+
+"Define leader key
 nnoremap <SPACE> <Nop>
 let mapleader=" "
+
+"Navigation with leader key
+noremap <leader>h <c-w>h 
+noremap <leader>j <c-w>j 
+noremap <leader>k <c-w>k 
+noremap <leader>l <c-w>l 
 
 noremap <leader>f :find 
 noremap <leader>q :bd<CR> 
 noremap <leader>t :vertical terminal 
 noremap <leader>w :w<CR>h 
 
-noremap <leader>h <c-w>h 
-noremap <leader>j <c-w>j 
-noremap <leader>k <c-w>k 
-noremap <leader>l <c-w>l 
-
-"Netrw
-let g:netrw_altv=1
-let g:netrw_banner=0
-let g:netrw_browse_split=3
-let g:netrw_liststyle=3
-let g:netrw_preview=1
-let g:netrw_winsize=30
-
-"ToggleNetrw
-let g:NetrwIsOpen=0
-
-function! ToggleNetrw()
-  if g:NetrwIsOpen
-    let i = bufnr("$")
-    while (i >= 1)
-      if (getbufvar(i, "&filetype") == "netrw")
-        silent exe "bwipeout " . i 
-      endif
-      let i-=1
-    endwhile
-    let g:NetrwIsOpen=0
-  else
-    let g:NetrwIsOpen=1
-    silent Lexplore
-  endif
-endfunction
-
-noremap <silent> <SPACE>b :call ToggleNetrw()<CR>
-
 "neoclide/coc.nvim
-nnoremap <leader>g :CocCommand git.chunkInfo<CR>
 nnoremap <silent> gd <Plug>(coc-definition)
 nnoremap <silent> gi <Plug>(coc-implementation)
 nnoremap <silent> gr <Plug>(coc-references)
 nnoremap <silent> gt <Plug>(coc-type-definition)
+
 nnoremap <silent><nowait> <leader>c  :<C-u>CocList commands<cr>
 nnoremap <silent><nowait> <leader>d  :<C-u>CocList diagnostics<cr>
 nnoremap <silent><nowait> <leader>e  :<C-u>CocList extensions<cr>
 nnoremap <silent><nowait> <leader>o  :<C-u>CocList outline<cr>
 nnoremap <silent><nowait> <leader>s  :<C-u>CocList -I symbols<cr>
-nnoremap [g <Plug>(coc-git-prevchunk)
-nnoremap ]g <Plug>(coc-git-nextchunk)
+
+nmap [g <Plug>(coc-git-prevchunk)
+nmap ]g <Plug>(coc-git-nextchunk)
+
+nmap <leader>g :CocCommand git.chunkInfo<CR>
+nmap <c-g> :CocCommand git.showCommit<CR>
+
+"Do NOT use `nore` mappings
+nmap <c-t> <Plug>(coc-translator-p)
+vmap <c-t> <Plug>(coc-translator-pv)
+nmap <c-r> <Plug>(coc-translator-r)
+vmap <c-r> <Plug>(coc-translator-rv)
 
 "Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-@> coc#refresh()
@@ -126,7 +148,10 @@ endfunction
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 let g:coc_global_extensions = [
+      \"coc-browser",
+      \"coc-clangd",
       \"coc-css",
+      \"coc-diagnostic",
       \"coc-emmet",
       \"coc-flutter",
       \"coc-git",
@@ -138,13 +163,18 @@ let g:coc_global_extensions = [
       \"coc-phpls",
       \"coc-prettier",
       \"coc-pyright",
+      \"coc-sh",
       \"coc-snippets",
       \"coc-sql",
+      \"coc-svg",
+      \"coc-translator",
       \"coc-tsserver",
       \"coc-vetur",
       \"coc-vimlsp",
+      \"coc-yaml",
       \]
 
+"LSP status diagnostic to statusline
 function! StatusDiagnostic() abort
   let info = get(b:, 'coc_diagnostic_info', {})
   if empty(info) | return '' | endif
