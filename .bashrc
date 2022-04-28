@@ -22,12 +22,14 @@ export PATH="$PATH:`pwd`/flutter/bin"
 
 export EDITOR=vim
 
-export QT_QPA_PLATFORMTHEME="qt5ct"  
+export HISTCONTROL=ignoreboth:erasedups
+
+export TERM=xterm-256color
 
 alias vimconf='vim -O ~/.vimrc ~/.vim/coc-settings.json'
 
-export HISTCONTROL=ignoreboth:erasedups
+alias updateAndClean='sudo pacman -Syu && sudo pacman -Scc && yay -Syu && yay -Scc && rm -r ~/.cache'
 
 set -o vi
 
-date
+
