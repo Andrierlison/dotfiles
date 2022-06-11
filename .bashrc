@@ -22,6 +22,8 @@ export PATH="$PATH:`pwd`/flutter/bin"
 
 export EDITOR=vim
 
+export HISTSIZE=10000
+
 export HISTCONTROL=ignoreboth:erasedups
 
 export TERM=xterm-256color
@@ -31,5 +33,3 @@ alias vimconf='vim -O ~/.vimrc ~/.vim/coc-settings.json'
 alias updateAndClean='sudo pacman -Syu && sudo pacman -Scc && yay -Syu && yay -Scc && rm -r ~/.cache'
 
 set -o vi
-
-
