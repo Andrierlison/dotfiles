@@ -6,7 +6,7 @@
 [[ $- != *i* ]] && return
 
 alias ls='ls --color=auto'
-PS1='[\u@\h \W]\$ '
+PS1='\T \w \n $ '
 
 # JAVA PATH
 export JAVA_HOME=/usr/lib/jvm/java-11-openjdk
