@@ -163,6 +163,7 @@ let g:coc_global_extensions = [
       \"coc-phpls",
       \"coc-prettier",
       \"coc-pyright",
+      \"coc-rls",
       \"coc-sh",
       \"coc-snippets",
       \"coc-sql",
