@@ -15,6 +15,7 @@
 .config/coc/
 .config/dconf
 .config/flutter
+.config/jxbrowser/7.22/crash-reports/settings.dat
 .config/mimeapps.list
 .config/pulse
 .config/user-dirs.dirs
@@ -46,6 +47,8 @@
 .themes
 .vim/autoload
 .vim/plugged
+.vim/plugged/coc.nvim
+.vim/plugged/coc.nvim
 .vim/sessions
 .viminfo
 .vscode
@@ -60,5 +63,3 @@ android-studio
 flutter
 steam.desktop
 yay
-.vim/plugged/coc.nvim
-.vim/plugged/coc.nvim
