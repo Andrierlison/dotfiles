@@ -32,4 +32,6 @@ alias vimconf='vim -O ~/.vimrc ~/.vim/coc-settings.json'
 
 alias updateAndClean='sudo pacman -Syu && sudo pacman -Scc && yay -Syu && yay -Scc && rm -r ~/.cache'
 
+alias restartWifi='sudo systemctl restart NetworkManager.service'
+
 set -o vi
